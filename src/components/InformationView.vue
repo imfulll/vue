@@ -52,6 +52,7 @@ export default {
   created() {},
   mounted() {
     this.selectedData = this.uniInfos;
+
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
@@ -62,6 +63,13 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=915cffed372954b7b44804ed422b9cf0";
       document.head.appendChild(script);
     }
+
+    var receiveUniTitle = this.$route.query.uniTitle;
+    if (receiveUniTitle) {
+      this.searchValue = receiveUniTitle;
+      this.search();
+    }
+    console.log(this.$route.query.uniTitle);
   },
   unmounted() {},
   methods: {
@@ -86,7 +94,6 @@ export default {
           this.message = true;
           this.msgText = "검색어를 입력해주세요";
         }
-        this.searchInit();
       } else {
         if (value) {
           this.selectedData = this.uniInfos.filter((e) => {
@@ -104,7 +111,6 @@ export default {
           this.message = true;
           this.msgText = "검색어를 입력해주세요";
         }
-        this.searchInit();
       }
     },
     enterKey() {
@@ -123,10 +129,10 @@ export default {
       var allMap = document.querySelector(".map");
       allMap.style.height = "0";
     },
-    initMap(i) {
-      const container = document.getElementById("map" + i);
-      var latitude = this.selectedData[i].Latitude;
-      var longitude = this.selectedData[i].Longitude;
+    initMap(index) {
+      const container = document.getElementById("map" + index);
+      let longitude = this.selectedData[index].Longitude;
+      let latitude = this.selectedData[index].Latitude;
       const options = {
         center: new kakao.maps.LatLng(latitude, longitude),
         level: 7,
@@ -168,6 +174,9 @@ export default {
           infowindow.close();
         };
       }
+
+      console.log(latitude);
+      console.log(longitude);
     },
   },
 };

@@ -23,10 +23,13 @@
       <div>{{ message }}</div>
       <ul class="titleContainer">
         <li :key="i" v-for="(uniInfo, i) in selectedData" class="uniTitle">
-          <a href="#">
-            <span>{{ i + 1 }}</span>
+          <router-link
+            :to="{
+              name: 'Information',
+              query: { uniTitle: uniInfo.uniTitle },
+            }">
             {{ uniInfo.uniTitle }}
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>

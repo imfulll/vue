@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1 class="logo">
+    <h1 class="logo" @click="refresh">
       <router-link to="/">전국 대학 & 전문대학 정보</router-link>
     </h1>
     <nav>
@@ -14,7 +14,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    refresh() {
+      location.reload();
+    },
+  },
+};
 </script>
 
 <style></style>

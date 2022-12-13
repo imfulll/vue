@@ -1,23 +1,61 @@
 <template>
   <div>
-    <div id="map"></div>
-    <div class="button-group">
-      <button @click="changeSize(0)">Hide</button>
-      <button @click="changeSize(400)">show</button>
-      <button @click="displayMarker()">대학&전문대학 위치보기</button>
+    <div>
+      <input
+        type="checkbox"
+        name=""
+        id="selectAll"
+        checked
+        @click="changeAll" />
+      <label for="selectAll">전체선택</label>
+      <div :key="i" v-for="(districtList, i) in districtLists">
+        <input
+          class="checkBox"
+          type="checkbox"
+          :id="districtList"
+          :value="districtList"
+          v-model="selectedDis"
+          @change="selectDis" />
+        <label :for="districtList">{{ districtList }}</label>
+      </div>
     </div>
+    {{ selectedDis }}
+    <div id="map"></div>
+    <div class="button-group"></div>
   </div>
 </template>
 
 <script>
-import UniList from "../data/uniInformation.json";
+import UniInformation from "../data/uniInformation.json";
+
 export default {
   name: "KakaoMap",
   data() {
     return {
-      UniInformation: UniList,
-      markers: [],
+      UniList: UniInformation,
       infowindow: null,
+      districtLists: [
+        "서울",
+        "부산",
+        "대구",
+        "인천",
+        "광주",
+        "대전",
+        "울산",
+        "세종",
+        "경기",
+        "강원",
+        "충북",
+        "충남",
+        "전북",
+        "전남",
+        "경북",
+        "경남",
+        "제주",
+      ],
+      selectAll: true,
+      selectedDis: [],
+      selectedData: [],
     };
   },
   mounted() {
@@ -31,14 +69,40 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=915cffed372954b7b44804ed422b9cf0";
       document.head.appendChild(script);
     }
+    this.selectedDis = this.districtLists;
+    console.log(this.selectAll);
   },
   methods: {
-    //고정
+    changeAll() {
+      if (this.selectAll == true) {
+        this.selectedDis = [];
+        this.selectAll = false;
+        document.getElementById("selectAll").checked = false;
+        console.log(this.selectAll);
+      } else if (this.selectAll == false) {
+        this.selectedDis = this.districtLists;
+        this.selectAll = true;
+        document.getElementById("selectAll").checked = true;
+        console.log(this.selectAll);
+      }
+    },
+    selectDis() {
+      if (this.selectedDis.length != 17) {
+        document.getElementById("selectAll").checked = false;
+        this.selectAll = false;
+        console.log(this.selectedDis.length);
+        console.log(this.selectAll);
+      } else if (this.selectedDis.length == 17) {
+        document.getElementById("selectAll").checked = true;
+        this.selectAll = false;
+        console.log(this.selectAll);
+      }
+    },
     initMap() {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 10,
+        level: 20,
       };
       this.map = new kakao.maps.Map(container, options);
     },
@@ -50,13 +114,11 @@ export default {
       this.map.relayout();
     },
 
-    //마커표시, 설명
-    //setBound 설정
     displayMarker() {
-      for (var i = 0; i < this.UniInformation.length; i++) {
+      for (var i = 0; i < this.selectedData.length; i++) {
         // 마커를 생성합니다
-        var latitude = this.UniInformation[i].Latitude;
-        var longitude = this.UniInformation[i].Longitude;
+        var latitude = this.selectedData[i].Latitude;
+        var longitude = this.selectedData[i].Longitude;
         var marker = new kakao.maps.Marker({
           map: this.map, // 마커를 표시할 지도
           position: new kakao.maps.LatLng(latitude, longitude), // 마커의 위치
@@ -64,7 +126,7 @@ export default {
 
         // 마커에 표시할 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({
-          content: this.UniInformation[i].uniTitle, // 인포윈도우에 표시할 내용
+          content: this.selectedData[i].uniTitle, // 인포윈도우에 표시할 내용
         });
 
         // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다

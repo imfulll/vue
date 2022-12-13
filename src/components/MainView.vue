@@ -14,12 +14,7 @@ export default {
   components: {
     UniList,
   },
-  methods: {
-    // 라우터 함수로 이동할 때는 $router 글로벌 객체에 이동할 주소 넣어줌
-    fnSubPage() {
-      this.$router.push("/sub");
-    },
-  },
+  methods: {},
 };
 </script>
 

@@ -70,7 +70,8 @@ export default {
       document.head.appendChild(script);
     }
     this.selectedDis = this.districtLists;
-    console.log(this.selectAll);
+    // this.selectedData = this.UniList;
+    this.displayMarker();
   },
   methods: {
     changeAll() {
@@ -78,25 +79,36 @@ export default {
         this.selectedDis = [];
         this.selectAll = false;
         document.getElementById("selectAll").checked = false;
-        console.log(this.selectAll);
       } else if (this.selectAll == false) {
         this.selectedDis = this.districtLists;
         this.selectAll = true;
         document.getElementById("selectAll").checked = true;
-        console.log(this.selectAll);
       }
     },
     selectDis() {
       if (this.selectedDis.length != 17) {
         document.getElementById("selectAll").checked = false;
         this.selectAll = false;
-        console.log(this.selectedDis.length);
-        console.log(this.selectAll);
       } else if (this.selectedDis.length == 17) {
         document.getElementById("selectAll").checked = true;
         this.selectAll = false;
-        console.log(this.selectAll);
       }
+
+      var arrAll = [];
+      for (var i = 0; i < this.selectedDis.length; i++) {
+        for (var j = 0; j < this.UniList.length; j++) {
+          if (this.UniList[j].uniDistrict == this.selectedDis[i]) {
+            var arr = this.UniList[j];
+            arrAll.push(arr);
+          }
+          console.log(arrAll);
+          // arr = [...arr];
+          this.selectedData = arrAll;
+        }
+      }
+      // console.log(this.selectedDis);
+      // console.log(this.selectedData);
+      this.displayMarker();
     },
     initMap() {
       const container = document.getElementById("map");

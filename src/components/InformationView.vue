@@ -12,20 +12,36 @@
     </div>
     <div class="searchResult">
       <div class="uniEach" :key="i" v-for="(uniList, i) in selectedData">
-        <span>{{ i + 1 }}</span>
-        <div>
-          <p>{{ uniList.uniTitle }}</p>
-          <p>학제 : {{ uniList.sort1 }}</p>
-          <p>설립기관 : {{ uniList.sort2 }}</p>
-          <p>지역 : {{ uniList.uniDistrict }}</p>
-          <p>주소 : {{ uniList.address }}</p>
-          <p>홈페이지 : {{ uniList.homepage }}</p>
-          <p>대표번호 : {{ uniList.telephone }}</p>
-          <p>입학정원 : {{ uniList.capacity }}</p>
-          <p>평균입학금 : {{ uniList.admissionFee }}</p>
-          <p>평균등록금 : {{ uniList.registrationFee }}</p>
+        <div class="contTop">
+          <p>
+            {{ i + 1 }}. <span>{{ uniList.uniTitle }}</span
+            >{{ uniList.sort1 }} / {{ uniList.sort2 }}
+          </p>
+        </div>
+        <div class="contMid">
+          <p>
+            대표번호 : <span>{{ uniList.telephone }}</span>
+          </p>
+          <p>
+            주소 : <span>{{ uniList.address }}</span>
+          </p>
+        </div>
+        <div class="contBot">
+          <p>
+            입학정원 : <span>{{ uniList.capacity }}</span
+            >명
+          </p>
+          <p>
+            평균입학금 : <span>{{ uniList.admissionFee }}</span
+            >원
+          </p>
+          <p>
+            평균등록금 : <span>{{ uniList.registrationFee }}</span
+            >원
+          </p>
         </div>
         <div>
+          <a @click="gogo(uniList.homepage)">홈페이지 바로가기</a>
           <button @click="callFunction(i)" :data-id="i">위치보기</button>
           <div :id="'map' + i" class="map"></div>
         </div>
@@ -69,7 +85,6 @@ export default {
       this.searchValue = receiveUniTitle;
       this.search();
     }
-    console.log(this.$route.query.uniTitle);
   },
   unmounted() {},
   methods: {
@@ -174,15 +189,57 @@ export default {
           infowindow.close();
         };
       }
-
-      console.log(latitude);
-      console.log(longitude);
+    },
+    gogo(i) {
+      window.open(i, "_blank");
+    },
+    priceToString(price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
 };
 </script>
 <style>
-.uniEach {
+.searchResult {
   border: 1px solid #ccc;
+}
+.uniEach {
+  width: 90%;
+  border-bottom: 1px solid #ccc;
+  margin: 0 auto;
+  padding: 20px 5%;
+}
+.contTop {
+  color: #666;
+}
+.contTop span {
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #0c44a2;
+  margin-right: 10%;
+}
+.contMid {
+  overflow: hidden;
+  color: #666;
+  text-align: center;
+}
+.contMid p {
+  float: left;
+  margin-right: 50px;
+}
+.contMid span {
+  color: #333;
+  font-weight: 700;
+}
+.contBot {
+  overflow: hidden;
+}
+.contBot p {
+  float: left;
+  margin-right: 50px;
+}
+.contBot span {
+  color: #333;
+  font-weight: 700;
 }
 </style>

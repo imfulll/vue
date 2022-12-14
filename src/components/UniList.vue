@@ -1,17 +1,20 @@
 <template>
   <div>
     <div>
-      <select name="" id="" @change="select()" v-model="sort1">
+      <label for="sort1">학제선택</label>
+      <select name="" id="sort1" @change="select()" v-model="sort1">
         <option value="all">전체</option>
         <option value="대학">대학</option>
         <option value="전문대학">전문대학</option>
       </select>
-      <select name="" id="" @change="select()" v-model="sort2">
+      <label for="sort2">기관선택</label>
+      <select name="" id="sort2" @change="select()" v-model="sort2">
         <option value="all">전체</option>
         <option value="사립">사립</option>
         <option value="국공립">국공립</option>
       </select>
-      <select name="" id="" @change="select()" v-model="uniDistrict">
+      <label for="uniDistrict">지역선택</label>
+      <select name="" id="uniDistrict" @change="select()" v-model="uniDistrict">
         <option value="all">전체</option>
         <option
           :value="districtList"
@@ -28,6 +31,7 @@
               name: 'Information',
               query: { uniTitle: uniInfo.uniTitle },
             }">
+            <span>{{ i + 1 }}.</span>
             {{ uniInfo.uniTitle }}
           </router-link>
         </li>

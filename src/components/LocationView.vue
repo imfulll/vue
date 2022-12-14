@@ -70,7 +70,7 @@ export default {
       document.head.appendChild(script);
     }
     this.selectedDis = this.districtLists;
-    // this.selectedData = this.UniList;
+    this.selectedData = this.UniList;
     this.displayMarker();
   },
   methods: {
@@ -79,10 +79,13 @@ export default {
         this.selectedDis = [];
         this.selectAll = false;
         document.getElementById("selectAll").checked = false;
+        this.initMap();
       } else if (this.selectAll == false) {
         this.selectedDis = this.districtLists;
         this.selectAll = true;
         document.getElementById("selectAll").checked = true;
+        this.selectedData = this.UniList;
+        this.displayMarker();
       }
     },
     selectDis() {
@@ -94,20 +97,19 @@ export default {
         this.selectAll = false;
       }
 
+      this.initMap();
+      this.selectedData = [];
       var arrAll = [];
+
       for (var i = 0; i < this.selectedDis.length; i++) {
         for (var j = 0; j < this.UniList.length; j++) {
           if (this.UniList[j].uniDistrict == this.selectedDis[i]) {
             var arr = this.UniList[j];
             arrAll.push(arr);
           }
-          console.log(arrAll);
-          // arr = [...arr];
-          this.selectedData = arrAll;
         }
       }
-      // console.log(this.selectedDis);
-      // console.log(this.selectedData);
+      this.selectedData = arrAll;
       this.displayMarker();
     },
     initMap() {
@@ -169,28 +171,6 @@ export default {
           infowindow.close();
         };
       }
-
-      /* if (this.markers.length > 0) {
-        this.markers.forEach((marker) => marker.setMap(null));
-      }
-      const positions = markerPositions.map(
-        (position) => new kakao.maps.LatLng(...position)
-      );
-      if (positions.length > 0) {
-        this.markers = positions.map(
-          (position) =>
-            new kakao.maps.Marker({
-              map: this.map,
-              position,
-            })
-        );
-        const bounds = positions.reduce(
-          (bounds, latlng) => bounds.extend(latlng),
-          new kakao.maps.LatLngBounds()
-        );
-
-        this.map.setBounds(bounds);
-      } */
     },
   },
 };

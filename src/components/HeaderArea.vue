@@ -1,18 +1,22 @@
 <template>
-  <header>
-    <div class="headerInner">
-      <h1 class="logo" @click="refresh">
-        <router-link to="/">전국 대학 & 전문대학 정보</router-link>
-      </h1>
-      <nav>
-        <ul>
-          <li><router-link to="/about">소개</router-link></li>
-          <li><router-link to="/information">대학정보</router-link></li>
-          <li><router-link to="/location">위치정보</router-link></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <router-link to="/about">소개</router-link>
+          <router-link to="/information">대학정보</router-link>
+          <router-link to="/location">위치정보</router-link>
+        </b-navbar-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto"> </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
@@ -25,16 +29,4 @@ export default {
 };
 </script>
 
-<style>
-.headerInner {
-  display: flex;
-  justify-content: space-between;
-}
-.headerInner nav {
-  overflow: hidden;
-}
-.headerInner nav li {
-  float: left;
-  margin-left: 20px;
-}
-</style>
+<style></style>

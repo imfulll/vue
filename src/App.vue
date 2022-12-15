@@ -24,27 +24,4 @@ export default {
 };
 </script>
 
-<style>
-ul {
-  list-style: none;
-  padding: 0;
-}
-body {
-  font-size: 16px;
-  color: #333;
-}
-a {
-  color: #333;
-  text-decoration: none;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.head {
-  color: red;
-}
-</style>
+<style></style>

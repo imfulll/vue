@@ -1,29 +1,69 @@
 <template>
   <div>
-    <div>
-      <label for="sort1">학제선택</label>
-      <select name="" id="sort1" @change="select()" v-model="sort1">
-        <option value="all">전체</option>
-        <option value="대학">대학</option>
-        <option value="전문대학">전문대학</option>
-      </select>
-      <label for="sort2">기관선택</label>
-      <select name="" id="sort2" @change="select()" v-model="sort2">
-        <option value="all">전체</option>
-        <option value="사립">사립</option>
-        <option value="국공립">국공립</option>
-      </select>
-      <label for="uniDistrict">지역선택</label>
-      <select name="" id="uniDistrict" @change="select()" v-model="uniDistrict">
-        <option value="all">전체</option>
-        <option
-          :value="districtList"
-          :key="i"
-          v-for="(districtList, i) in districtLists">
-          {{ districtList }}
-        </option>
-      </select>
-      <div>{{ message }}</div>
+    <div class="selectBox">
+      <p class="startText">대학 & 전문대학 검색</p>
+      <div>
+        <div>
+          <label for="sort1" class="label">학제선택</label>
+          <b-form-select
+            class="selectBtn"
+            id="sort1"
+            @change="select()"
+            v-model="sort1">
+            <template #first>
+              <b-form-select-option :value="null" disabled
+                >-- 학제 선택 --</b-form-select-option
+              >
+            </template>
+            <b-form-select-option value="all">전체</b-form-select-option>
+            <b-form-select-option value="대학">대학</b-form-select-option>
+            <b-form-select-option value="전문대학"
+              >전문대학</b-form-select-option
+            >
+          </b-form-select>
+        </div>
+        <div>
+          <label for="sort2" class="label">설립기관선택</label>
+          <b-form-select
+            class="selectBtn"
+            id="sort2"
+            @change="select()"
+            v-model="sort2">
+            <template #first>
+              <b-form-select-option :value="null" disabled
+                >-- 설립기관 선택 --</b-form-select-option
+              >
+            </template>
+            <b-form-select-option value="all">전체</b-form-select-option>
+            <b-form-select-option value="사립">사립</b-form-select-option>
+            <b-form-select-option value="국공립">국공립</b-form-select-option>
+          </b-form-select>
+        </div>
+        <div>
+          <label for="uniDistrict" class="label">지역선택</label>
+          <b-form-select
+            class="selectBtn"
+            id="uniDistrict"
+            @change="select()"
+            v-model="uniDistrict">
+            <template #first>
+              <b-form-select-option :value="null" disabled
+                >-- 지역 선택 --</b-form-select-option
+              >
+            </template>
+            <b-form-select-option value="all">전체</b-form-select-option>
+            <b-form-select-option
+              :value="districtList"
+              :key="i"
+              v-for="(districtList, i) in districtLists">
+              {{ districtList }}
+            </b-form-select-option>
+          </b-form-select>
+        </div>
+      </div>
+      <p class="resultText" v-html="message"></p>
+    </div>
+    <div class="listBox">
       <ul class="titleContainer">
         <li :key="i" v-for="(uniInfo, i) in selectedData" class="uniTitle">
           <router-link
@@ -77,7 +117,10 @@ export default {
   created() {},
   mounted() {
     this.selectedData = this.uniInfos;
-    this.message = this.selectedData.length + "개 검색되었습니다.";
+    this.message =
+      "<span class='resultNum'>" +
+      this.selectedData.length +
+      "</span>개 검색되었습니다.";
   },
   unmounted() {},
   methods: {
@@ -144,17 +187,64 @@ export default {
             i.uniDistrict === this.uniDistrict
         );
       }
-      this.message = this.selectedData.length + "개 검색되었습니다.";
-
-      console.log(this.sort1);
-      console.log(this.sort2);
-      console.log(this.uniDistrict);
-      console.log(this.selectedData);
+      this.message =
+        "<span class='resultNum'>" +
+        this.selectedData.length +
+        "</span>개 검색되었습니다.";
     },
   },
 };
 </script>
 <style>
+.selectBox {
+  border: 1px solid #ccc;
+  width: 500px;
+  margin: 0 auto;
+  padding: 30px 0;
+  margin-bottom: 50px;
+}
+.startText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.selectBox > div {
+  overflow: hidden;
+  padding-top: 30px;
+}
+.selectBox > div > div {
+  float: left;
+  position: relative;
+  margin: 0 20px;
+}
+.selectBox > div .label {
+  position: absolute;
+  left: 50%;
+  top: -25px;
+  color: #999;
+}
+.selectBox > div div:nth-of-type(1) .label {
+  margin-left: -32px;
+}
+.selectBox > div div:nth-of-type(2) .label {
+  margin-left: -48px;
+}
+.selectBox > div div:nth-of-type(3) .label {
+  margin-left: -32px;
+}
+.selectBox > .resultText {
+  margin-top: 30px;
+  text-align: center;
+}
+.selectBox > .resultText .resultNum {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0c4da2;
+}
+
+.listBox {
+  margin-bottom: 50px;
+}
 .titleContainer {
   display: grid;
   grid-template-columns: repeat(5, 20%);

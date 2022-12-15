@@ -1,25 +1,24 @@
 <template>
   <div>
-    <div>
-      <input
-        type="checkbox"
-        name=""
-        id="selectAll"
-        checked
-        @click="changeAll" />
-      <label for="selectAll">전체선택</label>
-      <div :key="i" v-for="(districtList, i) in districtLists">
-        <input
-          class="checkBox"
-          type="checkbox"
-          :id="districtList"
-          :value="districtList"
-          v-model="selectedDis"
-          @change="selectDis" />
-        <label :for="districtList">{{ districtList }}</label>
+    <div class="allBox">
+      <p class="startText">지역선택</p>
+      <div class="ckeckboxes">
+        <div class="selectAll">
+          <input type="checkbox" name="" id="selectAll" @click="changeAll" />
+          <label for="selectAll">전체</label>
+        </div>
+        <div :key="i" v-for="(districtList, i) in districtLists">
+          <input
+            class="checkBox"
+            type="checkbox"
+            :id="districtList"
+            :value="districtList"
+            v-model="selectedDis"
+            @change="selectDis" />
+          <label :for="districtList">{{ districtList }}</label>
+        </div>
       </div>
     </div>
-    {{ selectedDis }}
     <div id="map"></div>
     <div class="button-group"></div>
   </div>
@@ -53,7 +52,7 @@ export default {
         "경남",
         "제주",
       ],
-      selectAll: true,
+      selectAll: false,
       selectedDis: [],
       selectedData: [],
     };
@@ -69,9 +68,6 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=915cffed372954b7b44804ed422b9cf0";
       document.head.appendChild(script);
     }
-    this.selectedDis = this.districtLists;
-    this.selectedData = this.UniList;
-    this.displayMarker();
   },
   methods: {
     changeAll() {
@@ -115,8 +111,8 @@ export default {
     initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 20,
+        center: new kakao.maps.LatLng(36.8188286, 127.7994947),
+        level: 13,
       };
       this.map = new kakao.maps.Map(container, options);
     },
@@ -178,16 +174,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.startText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.allBox {
+  border: 1px solid #ccc;
+  width: 60%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.ckeckboxes {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  padding: 10px 0;
+}
+.ckeckboxes input {
+  margin-right: 10px;
+}
 #map {
-  width: 400px;
+  width: 60%;
   height: 400px;
-}
-
-.button-group {
-  margin: 10px 0px;
-}
-
-button {
-  margin: 0 3px;
+  margin: 0 auto 50px;
 }
 </style>

@@ -12,7 +12,7 @@
             v-model="sort1">
             <template #first>
               <b-form-select-option :value="null" disabled
-                >-- 학제 선택 --</b-form-select-option
+                >= 학제 선택 =</b-form-select-option
               >
             </template>
             <b-form-select-option value="all">전체</b-form-select-option>
@@ -31,7 +31,7 @@
             v-model="sort2">
             <template #first>
               <b-form-select-option :value="null" disabled
-                >-- 설립기관 선택 --</b-form-select-option
+                >= 기관 선택 =</b-form-select-option
               >
             </template>
             <b-form-select-option value="all">전체</b-form-select-option>
@@ -40,7 +40,7 @@
           </b-form-select>
         </div>
         <div>
-          <label for="uniDistrict" class="label">지역선택</label>
+          <label for="uniDistrict" class="label">지역 선택</label>
           <b-form-select
             class="selectBtn"
             id="uniDistrict"
@@ -48,7 +48,7 @@
             v-model="uniDistrict">
             <template #first>
               <b-form-select-option :value="null" disabled
-                >-- 지역 선택 --</b-form-select-option
+                >= 지역 선택 =</b-form-select-option
               >
             </template>
             <b-form-select-option value="all">전체</b-form-select-option>
@@ -211,11 +211,12 @@ export default {
 .selectBox > div {
   overflow: hidden;
   padding-top: 30px;
+  padding-left: 58px;
 }
 .selectBox > div > div {
   float: left;
   position: relative;
-  margin: 0 20px;
+  margin: 0 1%;
 }
 .selectBox > div .label {
   position: absolute;

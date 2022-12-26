@@ -1,7 +1,8 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info" class="header">
-      <b-navbar-brand href="/vue/">전국 대학 & 전문대학 정보</b-navbar-brand>
+      <b-navbar-brand href="/">전국 대학 & 전문대학 정보</b-navbar-brand>
+      <!-- <b-navbar-brand href="/vue/">전국 대학 & 전문대학 정보</b-navbar-brand> -->
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -9,7 +10,14 @@
         <h2 class="hidden">네비게이션영역</h2>
         <!-- Right aligned nav items -->
         <b-navbar-nav>
-          <router-link to="/vue/about" class="nav-link"
+          <router-link to="/about" class="nav-link"><h3>소개</h3></router-link>
+          <router-link to="/information" class="nav-link"
+            ><h3>대학정보</h3></router-link
+          >
+          <router-link to="/location" class="nav-link"
+            ><h3>위치정보</h3></router-link
+          >
+          <!-- <router-link to="/vue/about" class="nav-link"
             ><h3>소개</h3></router-link
           >
           <router-link to="/vue/information" class="nav-link"
@@ -17,7 +25,7 @@
           >
           <router-link to="/vue/location" class="nav-link"
             ><h3>위치정보</h3></router-link
-          >
+          > -->
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

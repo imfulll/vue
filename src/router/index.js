@@ -11,30 +11,30 @@ export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    // { path: "/", component: MainView },
-    // { path: "/main", component: MainView },
-    // { path: "/about", component: AboutView },
-    // {
-    //   path: "/information",
-    //   name: "Information",
-    //   component: () =>
-    //     import(
-    //       /* webpackChunkName: "databinding", webpackPrefetch:true */ "../components/InformationView.vue"
-    //     ),
-    // },
-    // { path: "/location", component: LocationView },
-
-    { path: "/vue/", component: MainView },
-    { path: "/vue/main", component: MainView },
-    { path: "/vue/about", component: AboutView },
+    { path: "/", component: MainView },
+    { path: "/main", component: MainView },
+    { path: "/about", component: AboutView },
     {
-      path: "/vue/information",
+      path: "/information",
       name: "Information",
       component: () =>
         import(
           /* webpackChunkName: "databinding", webpackPrefetch:true */ "../components/InformationView.vue"
         ),
     },
-    { path: "/vue/location", component: LocationView },
+    { path: "/location", component: LocationView },
+
+    // { path: "/vue/", component: MainView },
+    // { path: "/vue/main", component: MainView },
+    // { path: "/vue/about", component: AboutView },
+    // {
+    //   path: "/vue/information",
+    //   name: "Information",
+    //   component: () =>
+    //     import(
+    //       /* webpackChunkName: "databinding", webpackPrefetch:true */ "../components/InformationView.vue"
+    //     ),
+    // },
+    // { path: "/vue/location", component: LocationView },
   ],
 });

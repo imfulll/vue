@@ -17,13 +17,13 @@
       <img src="../../public/img/uniImg2.jpg" alt="" />
       <img src="../../public/img/uniImg3.jpg" alt="" />
     </div>
-    <div class="explainText">
+    <div class="explainText" style="margin-top: 30px">
       본 사이트는 상업적 목적이 아닌 개인 포트폴리오 용도로 만들어졌습니다.
     </div>
     <div class="explainText">
       홈페이지의 일부 내용과 활용한 데이터 등은 그 출처가 따로 있음을 밝힙니다.
     </div>
-    <div class="explainText">
+    <div class="explainText" style="margin-bottom: 50px">
       This website is made for
       <span class="portfolio">PERSONAL PORTFOLIO</span>, all the informations
       and the datas used in this website are <span class="not">NOT</span> used
@@ -56,7 +56,7 @@ p.title {
 .textArea {
   width: 80%;
   text-align: left;
-  margin: 5px auto;
+  margin: 15px auto;
   font-size: 1.2em;
   font-weight: 700;
 }
@@ -64,7 +64,7 @@ div.explainText {
   color: #999;
   width: 80%;
   text-align: left;
-  margin: 5px auto;
+  margin: 10px auto;
 }
 .imgBox {
   display: grid;
